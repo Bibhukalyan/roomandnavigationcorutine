@@ -7,10 +7,14 @@
     <fragment android:id="@+id/homeFragment" android:name="com.apivendor.money.testapp.ui.HomeFragment"
               android:label="fragment_home" tools:layout="@layout/fragment_home">
         <action android:id="@+id/actionAddNote" app:destination="@id/newNoteFragment"
-        />
+                app:launchSingleTop="true" app:popUpToInclusive="true"/>
     </fragment>
     <fragment android:id="@+id/newNoteFragment" android:name="com.apivendor.money.testapp.ui.NewNoteFragment"
               android:label="fragment_new_note" tools:layout="@layout/fragment_new_note">
-        <action android:id="@+id/actionSaveNote" app:destination="@id/homeFragment" app:popUpTo="@+id/homeFragment"/>
+        <action android:id="@+id/actionSaveNote" app:destination="@id/homeFragment" app:popUpTo="@+id/homeFragment"
+                app:popUpToInclusive="true" app:launchSingleTop="true"/>
+        <argument
+            android:name="Note"
+            app:argType="com.apivendor.money.testapp.db.Note" app:nullable="true" android:defaultValue="@null"/>
     </fragment>
 </navigation>

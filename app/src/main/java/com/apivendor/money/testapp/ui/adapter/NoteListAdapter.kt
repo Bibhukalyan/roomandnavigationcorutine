@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.apivendor.money.testapp.R
 import com.apivendor.money.testapp.db.Note
+import com.apivendor.money.testapp.ui.HomeFragmentDirections
+import com.apivendor.money.testapp.ui.NewNoteFragmentDirections
 import kotlinx.android.synthetic.main.indiview_note_item.view.*
 
 class NoteListAdapter(val noteList : List<Note>?) : RecyclerView.Adapter<NoteListAdapter.NoteListViewHolder>() {
@@ -25,7 +28,13 @@ class NoteListAdapter(val noteList : List<Note>?) : RecyclerView.Adapter<NoteLis
     override fun onBindViewHolder(holder: NoteListViewHolder, position: Int) {
         //val note = noteList?.get(position)
         holder.itemView.tv_note_title.text = noteList!![position].title
-        holder.itemView.tv_note_text.text = noteList!![position].note
+        holder.itemView.tv_note_text.text = noteList[position].note
+
+        holder.itemView.setOnClickListener{
+            val action = HomeFragmentDirections.actionAddNote()
+            action.note = noteList[position]
+            Navigation.findNavController(it).navigate(action)
+        }
     }
 
     class NoteListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
